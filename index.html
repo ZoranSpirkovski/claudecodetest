@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Email Signature Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+            color: #667eea;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 5px;
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .color-themes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .theme-option {
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .theme-option:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .theme-option.active {
+            border-color: #667eea;
+            background: #f0f3ff;
+        }
+
+        .theme-option .color-sample {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+        }
+
+        .theme-option .theme-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .social-inputs {
+            display: grid;
+            gap: 15px;
+        }
+
+        .social-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .social-input-group input {
+            flex: 1;
+        }
+
+        .social-input-group .icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .preview-container {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 8px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-label {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f3ff;
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: none;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification.show {
+            display: flex;
+        }
+
+        .section-divider {
+            margin: 25px 0;
+            border: none;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .helper-text {
+            background: #f0f3ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #555;
+            border-left: 4px solid #667eea;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✨ Email Signature Generator</h1>
+            <p>Create a professional email signature in seconds</p>
+        </header>
+
+        <div class="main-grid">
+            <!-- Left Panel - Input Form -->
+            <div class="card">
+                <h2>📝 Your Information</h2>
+
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" placeholder="e.g., Zoran Spirkovski" value="Zoran Spirkovski">
+                </div>
+
+                <div class="form-group">
+                    <label for="jobTitle">Job Title *</label>
+                    <input type="text" id="jobTitle" placeholder="e.g., Freelance Journalist" value="Freelance Journalist">
+                </div>
+
+                <div class="form-group">
+                    <label for="credentials">Credentials / Tagline</label>
+                    <input type="text" id="credentials" placeholder="e.g., Published by Coinspeaker, CryptoBriefing" value="Published by Coinspeaker, CryptoBriefing, BeInCrypto">
+                    <small>Optional: Add publications, certifications, or a short tagline</small>
+                </div>
+
+                <hr class="section-divider">
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" placeholder="your@email.com" value="zoransp@outlook.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="website">Website / Portfolio</label>
+                    <input type="url" id="website" placeholder="https://yourwebsite.com" value="https://muckrack.com/zoran-spirkovski">
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" placeholder="e.g., New York, USA" value="Ohrid, North Macedonia">
+                </div>
+
+                <div class="form-group">
+                    <label for="tagline">Bottom Tagline</label>
+                    <input type="text" id="tagline" placeholder="e.g., Covering cryptocurrency and blockchain" value="Covering cryptocurrency, Web3, DeFi, and blockchain innovation">
+                    <small>Appears at the bottom of your signature</small>
+                </div>
+
+                <hr class="section-divider">
+
+                <h2 style="margin-top: 20px;">🔗 Social Links</h2>
+                <div class="helper-text">
+                    Leave blank to hide. Only filled links will appear in your signature.
+                </div>
+
+                <div class="social-inputs">
+                    <div class="social-input-group">
+                        <span class="icon">𝕏</span>
+                        <input type="url" id="twitter" placeholder="https://x.com/yourhandle" value="https://x.com/SpirkovskiZoran">
+                    </div>
+                    <div class="social-input-group">
+                        <span class="icon">📱</span>
+                        <input type="url" id="telegram" placeholder="https://t.me/yourhandle" value="https://t.me/zoranspirkovski">
+                    </div>
+                    <div class="social-input-group">
+                        <span class="icon">💼</span>
+                        <input type="url" id="linkedin" placeholder="https://linkedin.com/in/yourprofile" value="https://www.linkedin.com/in/zoran-spirkovski/">
+                    </div>
+                    <div class="social-input-group">
+                        <span class="icon">🐙</span>
+                        <input type="url" id="github" placeholder="https://github.com/yourusername">
+                    </div>
+                </div>
+
+                <hr class="section-divider">
+
+                <h2 style="margin-top: 20px;">🎨 Color Theme</h2>
+                <div class="color-themes">
+                    <div class="theme-option active" data-theme="professional">
+                        <div class="color-sample" style="background: #0066cc;"></div>
+                        <div class="theme-name">Professional</div>
+                    </div>
+                    <div class="theme-option" data-theme="dark">
+                        <div class="color-sample" style="background: #2d3748;"></div>
+                        <div class="theme-name">Dark</div>
+                    </div>
+                    <div class="theme-option" data-theme="modern">
+                        <div class="color-sample" style="background: #10b981;"></div>
+                        <div class="theme-name">Modern</div>
+                    </div>
+                    <div class="theme-option" data-theme="elegant">
+                        <div class="color-sample" style="background: #8b5cf6;"></div>
+                        <div class="theme-name">Elegant</div>
+                    </div>
+                    <div class="theme-option" data-theme="minimal">
+                        <div class="color-sample" style="background: #6b7280;"></div>
+                        <div class="theme-name">Minimal</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Preview -->
+            <div class="card">
+                <h2>👁️ Live Preview</h2>
+                <span class="preview-label">PREVIEW</span>
+                <div class="preview-container">
+                    <div id="signaturePreview"></div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="copySignature()">
+                        📋 Copy to Clipboard
+                    </button>
+                    <button class="btn btn-secondary" onclick="downloadSignature()">
+                        💾 Download HTML
+                    </button>
+                    <button class="btn btn-secondary" onclick="copyInstructions()">
+                        📖 Copy Instructions
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <span>✓</span>
+        <span id="notificationText">Copied to clipboard!</span>
+    </div>
+
+    <script>
+        const themes = {
+            professional: {
+                primary: '#0066cc',
+                text: '#333333',
+                secondary: '#666666',
+                tertiary: '#888888',
+                border: '#dddddd'
+            },
+            dark: {
+                primary: '#2d3748',
+                text: '#1a202c',
+                secondary: '#4a5568',
+                tertiary: '#718096',
+                border: '#cbd5e0'
+            },
+            modern: {
+                primary: '#10b981',
+                text: '#065f46',
+                secondary: '#047857',
+                tertiary: '#059669',
+                border: '#d1fae5'
+            },
+            elegant: {
+                primary: '#8b5cf6',
+                text: '#5b21b6',
+                secondary: '#7c3aed',
+                tertiary: '#a78bfa',
+                border: '#e9d5ff'
+            },
+            minimal: {
+                primary: '#6b7280',
+                text: '#111827',
+                secondary: '#4b5563',
+                tertiary: '#9ca3af',
+                border: '#e5e7eb'
+            }
+        };
+
+        let currentTheme = 'professional';
+
+        // Social media icon URLs
+        const socialIcons = {
+            twitter: 'https://cdn-icons-png.flaticon.com/32/5968/5968958.png',
+            telegram: 'https://cdn-icons-png.flaticon.com/32/2111/2111646.png',
+            linkedin: 'https://cdn-icons-png.flaticon.com/32/174/174857.png',
+            github: 'https://cdn-icons-png.flaticon.com/32/733/733553.png'
+        };
+
+        function generateSignature() {
+            const theme = themes[currentTheme];
+            const name = document.getElementById('fullName').value || 'Your Name';
+            const title = document.getElementById('jobTitle').value || 'Your Title';
+            const credentials = document.getElementById('credentials').value;
+            const email = document.getElementById('email').value || 'your@email.com';
+            const website = document.getElementById('website').value;
+            const location = document.getElementById('location').value;
+            const tagline = document.getElementById('tagline').value;
+
+            const twitter = document.getElementById('twitter').value;
+            const telegram = document.getElementById('telegram').value;
+            const linkedin = document.getElementById('linkedin').value;
+            const github = document.getElementById('github').value;
+
+            let socialLinks = '';
+            if (twitter) socialLinks += `<a href="${twitter}" style="text-decoration: none; margin-right: 8px;"><img src="${socialIcons.twitter}" alt="X (Twitter)" width="20" height="20" style="vertical-align: middle; border: none;"></a>`;
+            if (telegram) socialLinks += `<a href="${telegram}" style="text-decoration: none; margin-right: 8px;"><img src="${socialIcons.telegram}" alt="Telegram" width="20" height="20" style="vertical-align: middle; border: none;"></a>`;
+            if (linkedin) socialLinks += `<a href="${linkedin}" style="text-decoration: none; margin-right: 8px;"><img src="${socialIcons.linkedin}" alt="LinkedIn" width="20" height="20" style="vertical-align: middle; border: none;"></a>`;
+            if (github) socialLinks += `<a href="${github}" style="text-decoration: none; margin-right: 8px;"><img src="${socialIcons.github}" alt="GitHub" width="20" height="20" style="vertical-align: middle; border: none;"></a>`;
+
+            const signature = `
+<table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, sans-serif; font-size: 13px; line-height: 1.4; color: ${theme.text}; max-width: 500px;">
+    <tr>
+        <td style="padding-bottom: 10px;">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td style="padding-right: 15px; border-right: 2px solid ${theme.primary}; vertical-align: top;">
+                        <div style="font-size: 16px; font-weight: bold; color: ${theme.primary}; margin-bottom: 4px;">${name}</div>
+                        <div style="font-size: 13px; color: ${theme.secondary}; margin-bottom: 2px;">${title}</div>
+                        ${credentials ? `<div style="font-size: 11px; color: ${theme.tertiary}; line-height: 1.3;">${credentials.replace(/,/g, ',<br>')}</div>` : ''}
+                    </td>
+                    <td style="padding-left: 15px; vertical-align: top;">
+                        <div style="margin-bottom: 3px;">
+                            <span style="color: ${theme.secondary};">Email:</span>
+                            <a href="mailto:${email}" style="color: ${theme.primary}; text-decoration: none;">${email}</a>
+                        </div>
+                        ${website ? `<div style="margin-bottom: 3px;">
+                            <span style="color: ${theme.secondary};">Web:</span>
+                            <a href="${website}" style="color: ${theme.primary}; text-decoration: none;">${website.replace('https://', '').replace('http://', '')}</a>
+                        </div>` : ''}
+                        ${location ? `<div style="margin-bottom: 8px;">
+                            <span style="color: ${theme.secondary};">Location:</span>
+                            <span style="color: ${theme.text};">${location}</span>
+                        </div>` : ''}
+                        ${socialLinks ? `<div>${socialLinks}</div>` : ''}
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    ${tagline ? `<tr>
+        <td style="padding-top: 10px; border-top: 1px solid ${theme.border}; font-size: 11px; color: #999999;">
+            ${tagline}
+        </td>
+    </tr>` : ''}
+</table>`;
+
+            return signature;
+        }
+
+        function updatePreview() {
+            document.getElementById('signaturePreview').innerHTML = generateSignature();
+        }
+
+        function copySignature() {
+            const signature = generateSignature();
+            const blob = new Blob([signature], { type: 'text/html' });
+            const clipboardItem = new ClipboardItem({ 'text/html': blob });
+
+            navigator.clipboard.write([clipboardItem]).then(() => {
+                showNotification('Signature copied! Paste it into your email client.');
+            }).catch(() => {
+                // Fallback for browsers that don't support clipboard API
+                const textarea = document.createElement('textarea');
+                textarea.value = signature;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showNotification('Signature copied to clipboard!');
+            });
+        }
+
+        function downloadSignature() {
+            const signature = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { margin: 0; padding: 20px; background: #f5f5f5; }
+    </style>
+</head>
+<body>
+    ${generateSignature()}
+</body>
+</html>`;
+
+            const blob = new Blob([signature], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'email-signature.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showNotification('Signature downloaded! Open in browser and copy.');
+        }
+
+        function copyInstructions() {
+            const instructions = `HOW TO INSTALL YOUR EMAIL SIGNATURE
+
+For Gmail:
+1. Open the downloaded HTML file in your web browser
+2. Select ALL the content (Ctrl+A or Cmd+A)
+3. Copy it (Ctrl+C or Cmd+C)
+4. Go to Gmail Settings (gear icon → "See all settings")
+5. Scroll to "Signature" section
+6. Click "Create new"
+7. Paste your signature (Ctrl+V or Cmd+V)
+8. Click "Save Changes"
+
+For Outlook:
+1. Open Outlook and go to File → Options → Mail → Signatures
+2. Click "New" to create a new signature
+3. Open the HTML file in a browser, select all (Ctrl+A), and copy (Ctrl+C)
+4. Paste into the signature editor
+5. Click "OK" to save
+
+For Apple Mail:
+1. Open Mail → Preferences → Signatures
+2. Click "+" to add a new signature
+3. Open the HTML file in Safari, select all, and copy
+4. Paste into the signature field
+5. Close Preferences to save
+
+Pro Tip: After pasting, send yourself a test email to verify it looks correct!`;
+
+            navigator.clipboard.writeText(instructions).then(() => {
+                showNotification('Instructions copied to clipboard!');
+            });
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Event listeners
+        document.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('input', updatePreview);
+        });
+
+        document.querySelectorAll('.theme-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                currentTheme = this.dataset.theme;
+                updatePreview();
+            });
+        });
+
+        // Initialize
+        updatePreview();
+    </script>
+</body>
+</html>

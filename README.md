@@ -4,7 +4,9 @@ A beautiful, interactive web tool for creating professional email signatures wit
 
 ## 🚀 Try It Now
 
-Simply open `signature-generator.html` in your web browser and start creating!
+**Live Demo:** Visit the hosted version at `https://[username].github.io/[repo-name]/`
+
+Or download and open `signature-generator.html` in your web browser locally!
 
 ## ✨ Features
 
@@ -63,10 +65,12 @@ Simply open `signature-generator.html` in your web browser and start creating!
 
 ## 📁 Project Files
 
+- `index.html` - Main entry point (same as signature-generator.html)
 - `signature-generator.html` - Interactive signature builder (main tool)
 - `email-signature.html` - Pre-made signature example
 - `email-signature-simple.html` - Simplified version
 - `SIGNATURE-INSTRUCTIONS.md` - Manual installation guide
+- `.github/workflows/deploy.yml` - GitHub Pages deployment workflow
 - `README.md` - This file
 
 ## 🛠️ Technical Details
@@ -87,6 +91,18 @@ Email clients don't support modern CSS like regular browsers. HTML tables ensure
 - Only add social links that are professionally relevant
 - Test by sending an email to yourself
 - Some email clients may strip certain styles - the generator uses safe, compatible HTML
+
+## 🚀 Deployment
+
+This project is configured to automatically deploy to GitHub Pages via GitHub Actions.
+
+**Setup:**
+1. Go to your repository Settings → Pages
+2. Set Source to "GitHub Actions"
+3. Push to main/master branch
+4. Your site will be live at `https://[username].github.io/[repo-name]/`
+
+The deployment workflow (`.github/workflows/deploy.yml`) automatically publishes the site when you push changes.
 
 ## 🤝 Contributing
 
