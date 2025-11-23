@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - master
+      - claude/build-new-feature-01BNKizuzma62v8f4oPudiZW
   workflow_dispatch:
 
 permissions:
